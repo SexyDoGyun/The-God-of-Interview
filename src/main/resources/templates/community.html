@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Blog Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/blog/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        .dropdown-menu-custom {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* 게시물 카드 스타일 */
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 게시물 내 아이콘 스타일 */
+        .card-text small {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .card-text small .text-muted {
+            font-size: 0.9rem;
+        }
+
+        .card-text small i {
+            margin-right: 5px;
+            color: #007bff;
+        }
+
+        /* '글쓰기' 버튼 강화 */
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* 페이지 네비게이션 스타일 */
+        .pagination .page-item .page-link {
+            color: #007bff;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        /* 커뮤니티 제목 스타일 */
+        h5 {
+            font-family: 'Jua', sans-serif; /* 특별한 폰트 사용 */
+            font-size: 2rem;
+            color: #343a40; /* 어두운 색상으로 변경 */
+            text-transform: uppercase; /* 대문자로 변경 */
+            letter-spacing: 2px; /* 자간 넓히기 */
+            margin-bottom: 0; /* 아래 여백 제거 */
+        }
+
+        /* 글쓰기 버튼 스타일 */
+        .btn-success {
+            background-color: #28a745; /* 기본 배경색 */
+            border-color: #28a745; /* 기본 테두리 */
+            font-weight: bold; /* 글씨를 굵게 */
+            padding: 10px 20px; /* 버튼 크기 키우기 */
+            transition: background-color 0.2s, transform 0.2s; /* 배경색과 크기 변화를 위한 트랜지션 */
+            border-radius: 30px; /* 버튼 모서리 둥글게 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+        }
+
+        .btn-success:hover {
+            background-color: #218838; /* 마우스 오버 시 배경색 변경 */
+            transform: translateY(-2px); /* 살짝 위로 움직이는 효과 */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* 그림자 강하게 */
+        }
+        .comm-image {
+            width: 100px; /* 이미지 크기를 작게 설정 */
+            height: auto;
+            margin-left: 10px; /* 카드 내용과의 간격 */
+            border-radius: 5px;
+            float: right; /* 이미지 우측 배치 */
+        }
+        .content-preview {
+            white-space: nowrap; /* 줄바꿈 방지 */
+            overflow: hidden; /* 넘치는 텍스트 숨김 */
+            text-overflow: ellipsis; /* 말줄임표(...) 추가 */
+            width: 650px; /* 원하는 너비 설정 */
+            display: inline-block;
+        }
+        .title-preview {
+            white-space: nowrap; /* 줄바꿈 방지 */
+            overflow: hidden; /* 넘치는 텍스트 숨김 */
+            text-overflow: ellipsis; /* 말줄임표(...) 추가 */
+            width: 250px; /* 제목의 최대 너비 */
+            display: inline-block;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1"></div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">
+                    <img src="/images/로고.png" alt="로고" style="max-width: 50%; height: auto;">
+                </a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <div th:if="${isAuthenticated}" class="d-flex align-items-center">
+                    <div class="dropdown me-2">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            마이페이지
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" th:href="@{/profile}">내 정보</a></li>
+                            <li><a class="dropdown-item" th:href="@{/mockinterview}">모의면접 결과</a></li>
+                            <li><a class="dropdown-item" th:href="@{/change-password}">비밀번호 변경</a></li>
+                            <li><a class="dropdown-item" th:href="@{/delete-account}">회원 탈퇴</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+                </div>
+                <div th:if="${!isAuthenticated}">
+                    <a class="btn btn-sm btn-outline-secondary me-2" th:href="@{/login}">로그인</a>
+                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/register}">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- 커뮤니티 페이지 -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <!-- 게시물 목록 -->
+        <div class="col-9">
+            <!-- 글쓰기 버튼 -->
+            <div class="d-flex justify-content-between mb-3">
+                <h5>커뮤니티</h5>
+                <a href="/community/write" class="btn btn-success">글쓰기</a>
+            </div>
+
+            <!-- 게시물 리스트 -->
+            <div th:if="${posts.size() == 0}" class="alert alert-warning">현재 게시물이 없습니다.</div>
+            <!-- 게시물 리스트 -->
+            <div th:each="post : ${posts}" class="card mb-3 mx-auto" style="width: 100%; cursor: pointer;">
+                <a th:href="@{/community/view/{id}(id=${post.id})}" class="stretched-link text-decoration-none text-dark">
+                    <div class="card-body">
+                        <img th:if="${post.filePath != null}" th:src="@{${post.filePath}}" alt="Post Image" class="comm-image">
+                        <h5 class="title-preview" th:text="${post.title}">게시물 제목</h5>
+                        <p class="content-preview" th:text="${post.content}"></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                👀 : <span th:text="${post.viewCount}">0</span> |
+                                💬 : <span th:text="${post.commentCount}">0</span> <!-- 댓글 수 표시 -->
+                                👍 : <span th:text="${post.likeCount}">0</span> |
+                                <span th:text="${post.createdAt}">작성 시간</span>
+                            </small>
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 페이지 네비게이션 -->
+            <nav aria-label="Page navigation" th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:if="${currentPage > 0}">
+                        <a class="page-link" th:href="@{/community(page=${currentPage - 1}, size=${size})}" aria-label="이전">
+                            <span aria-hidden="true">이전</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                        <a class="page-link" th:href="@{/community(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+                    </li>
+                    <li class="page-item" th:if="${currentPage < totalPages - 1}">
+                        <a class="page-link" th:href="@{/community(page=${currentPage + 1}, size=${size})}" aria-label="다음">
+                            <span aria-hidden="true">다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- 푸터 -->
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="container d-flex flex-column align-items-center">
+                <img src="/images/로고.png" alt="면접의 신 로고" class="img-fluid mb-3" style="max-width: 100px; height: auto;">
+                <div class="text-center text-body-secondary mt-3 d-flex flex-wrap justify-content-center">
+                    <div class="p-2">
+                        <p class="mb-0">프로젝트: 면접의 신</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">개발자: 김도균, 석재민</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">팀장: 김도균</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">연락처: 010-5627-3836</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>

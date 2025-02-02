@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Blog Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/blog/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        header {
+            width: 100%;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: white;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        main {
+            margin-top: 100px;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .textarea-container {
+            width: 100%;
+            min-height: 250px;
+            max-height: 400px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .textarea-container {
+                min-height: 200px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .btn-primary {
+            background-color: #ce0707;
+            border-color: #ce0707;
+        }
+
+        main {
+            margin-top: 100px;
+        }
+
+        .form-section,
+        .result-section {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h5,
+        .result-section h5 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ce0707;
+            border-color: #ce0707;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .result-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .result-section ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #f8f9fa;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .form-section,
+            .result-section {
+                width: 100%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header class="container-fluid">
+    <div class="container header-content">
+        <!-- 로고 -->
+        <div class="d-flex align-items-center">
+            <a href="/" class="text-decoration-none">
+                <img src="/images/로고.png" alt="로고" class="logo">
+            </a>
+        </div>
+
+        <!-- 중앙 메뉴 -->
+        <div class="nav-center">
+            <a class="nav-link link-body-emphasis" href="/Ai-interview-step1">AI 모의면접</a> |
+            <a class="nav-link link-body-emphasis" href="/community">커뮤니티</a>
+        </div>
+
+        <!-- 로그인/회원가입 및 마이페이지 -->
+        <div class="d-flex align-items-center">
+            <div th:if="${isAuthenticated}" class="d-flex align-items-center">
+                <div class="dropdown me-2">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        마이페이지
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-custom">
+                        <li><a class="dropdown-item" th:href="@{/profile}">내 정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mockinterview}">모의면접 결과</a></li>
+                        <li><a class="dropdown-item" th:href="@{/change-password}">비밀번호 변경</a></li>
+                        <li><a class="dropdown-item" th:href="@{/delete-account}">회원 탈퇴</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+            </div>
+            <div th:if="${!isAuthenticated}">
+                <a class="btn btn-sm btn-outline-secondary me-2" th:href="@{/login}">로그인</a>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/register}">회원가입</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="row mt-4">
+        <!-- 입력 섹션 -->
+        <div class="col-md-6">
+            <div class="form-section">
+                <h5>실업급여 계산 입력</h5>
+                <form id="unemploymentForm">
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">생년월일</label>
+                        <input type="date" class="form-control" id="birthDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="hireDate" class="form-label">입사일</label>
+                        <input type="date" class="form-control" id="hireDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="leaveDate" class="form-label">퇴사일</label>
+                        <input type="date" class="form-control" id="leaveDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastSalary" class="form-label">월 평균 급여 (세전)</label>
+                        <input type="number" class="form-control" id="lastSalary" placeholder="월급 (원)">
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="calculateUnemployment()">계산하기</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 결과 섹션 -->
+        <div class="col-md-6">
+            <div class="result-section">
+                <h5>계산 결과</h5>
+                <p>총 실업급여: <span id="totalUnemploymentPay">0</span> 원</p>
+                <hr>
+                <p>퇴사 당시 만 나이: <span id="age">0</span> 세</p>
+                <p>퇴사 기준 근속기간: <span id="workingDays">0</span> 일</p>
+                <p>1일 지급 금액: <span id="dailyPay">0</span> 원</p>
+                <p>월 지급 금액: <span id="monthlyPay">0</span> 원</p>
+                <hr>
+                <button class="btn btn-secondary w-100" onclick="resetForm()">다시 계산하기</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="container d-flex flex-column align-items-center">
+                <img src="/images/로고.png" alt="면접의 신 로고" class="img-fluid mb-3"
+                     style="max-width: 100px; height: auto;">
+                <div class="text-center text-body-secondary mt-3 d-flex flex-wrap justify-content-center">
+                    <div class="p-2">
+                        <p class="mb-0">프로젝트: 면접의 신</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">개발자: 김도균, 석재민</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">팀장: 김도균</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">연락처: 010-5627-3836</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<script>
+    function calculateUnemployment() {
+        const birthDate = new Date(document.getElementById("birthDate").value);
+        const hireDate = new Date(document.getElementById("hireDate").value);
+        const leaveDate = new Date(document.getElementById("leaveDate").value);
+        const lastSalary = parseFloat(document.getElementById("lastSalary").value);
+
+        if (isNaN(birthDate) || isNaN(hireDate) || isNaN(leaveDate) || isNaN(lastSalary) || lastSalary <= 0) {
+            alert("모든 값을 정확히 입력해주세요.");
+            return;
+        }
+
+        // 나이 계산
+        const age = Math.floor((leaveDate - birthDate) / (1000 * 60 * 60 * 24 * 365));
+
+        // 근속일 계산
+        const workingDays = Math.floor((leaveDate - hireDate) / (1000 * 60 * 60 * 24));
+
+        // 1일 지급 금액 계산 (50% 보정)
+        const dailyPay = Math.min((lastSalary / 30) * 0.5, 66360); // 상한액 예시
+
+        // 총 지급 금액 계산 (예시로 6개월 지급)
+        const totalPay = Math.round(dailyPay * 180);
+
+        // 월 지급 금액 계산
+        const monthlyPay = Math.round(dailyPay * 30);
+
+        // 결과 출력
+        document.getElementById("age").textContent = age;
+        document.getElementById("workingDays").textContent = workingDays.toLocaleString();
+        document.getElementById("dailyPay").textContent = dailyPay.toLocaleString();
+        document.getElementById("monthlyPay").textContent = monthlyPay.toLocaleString();
+        document.getElementById("totalUnemploymentPay").textContent = totalPay.toLocaleString();
+    }
+
+    function resetForm() {
+        document.getElementById("unemploymentForm").reset();
+        document.getElementById("age").textContent = "0";
+        document.getElementById("workingDays").textContent = "0";
+        document.getElementById("dailyPay").textContent = "0";
+        document.getElementById("monthlyPay").textContent = "0";
+        document.getElementById("totalUnemploymentPay").textContent = "0";
+    }
+</script>
+
+</body>
+</html>

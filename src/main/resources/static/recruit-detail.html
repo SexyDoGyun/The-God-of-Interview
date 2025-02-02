@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채용 공고 상세</title>
+    <style>
+        /* 기본 설정 */
+        /* 기본 설정 */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .oa-header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ce0707;
+            text-align: center;
+        }
+
+        .oa-backBtn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #ce0707;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .oa-backBtn:hover {
+            background-color: #b00505;
+        }
+
+        .oa-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .oa-detail-head h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .oa-detail-head p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .oa-detail-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .oa-detail-info h5 {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .oa-detail-info p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* <pre> 태그 스타일 */
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto; /* 내용이 길 경우 스크롤 가능 */
+            white-space: pre-wrap; /* 내용 줄바꿈 처리 */
+            word-wrap: break-word; /* 단어가 너무 길 경우 줄바꿈 처리 */
+            margin: 0; /* 표 안에서 간격 제거 */
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #ce0707;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: nowrap; /* 한 줄로 유지 */
+            text-align: center; /* 가운데 정렬 */
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* .oa-table 클래스 스타일 */
+        .oa-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .oa-table th, .oa-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center; /* 모든 셀 가운데 정렬 */
+        }
+
+        .oa-table th {
+            background-color: #ce0707;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: nowrap; /* 한 줄 유지 */
+        }
+
+        .oa-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .oa-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 반응형 테이블 스타일 */
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="container">
+        <div class="oa-header">
+            <h1>공공기관 채용정보 오픈API 데이터조회</h1>
+        </div>
+        <div class="oa-content">
+            <a class="oa-backBtn" href="/">목록으로</a>
+            <div class="oa-detail-head">
+                <h2 id="recrutPbancTtl" class="title">공고 제목</h2>
+                <p id="instNm" class="subTitle">기관명</p>
+            </div>
+            <div class="oa-detail-info">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>공고기간</td>
+                        <td id="recruitDate">공고 기간</td>
+                    </tr>
+                    <tr>
+                        <td>채용분야</td>
+                        <td id="ncsCdNmLst">채용 분야</td>
+                    </tr>
+                    <tr>
+                        <td>대체인력여부</td>
+                        <td id="replmprYn">대체인력 여부</td>
+                    </tr>
+                    <tr>
+                        <td>고용형태</td>
+                        <td id="hireTypeNmLst">고용 형태</td>
+                    </tr>
+                    <tr>
+                        <td>학력정보</td>
+                        <td id="acbgCondNmLst">학력 정보</td>
+                    </tr>
+                    <tr>
+                        <td>근무지</td>
+                        <td id="workRgnNmLst">근무지</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <table class="oa-table">
+                <tr>
+                    <th>응시자격</th>
+                    <td><pre id="aplyQlfcCn">응시 자격</pre></td>
+                </tr>
+                <tr>
+                    <th>결격사유</th>
+                    <td><pre id="disqlfcRsn">결격 사유</pre></td>
+                </tr>
+                <tr>
+                    <th>우대조건</th>
+                    <td><pre id="prefCondCn">우대 조건</pre></td>
+                </tr>
+                <tr>
+                    <th>우대내용</th>
+                    <td><pre id="prefCn">우대 내용</pre></td>
+                </tr>
+                <tr>
+                    <th>전형절차 방법</th>
+                    <td><pre id="scrnprcdrMthdExpln">전형 절차 방법</pre></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        const recrutPblntSn = getQueryParameter('sn');  // sn 파라미터 가져오기
+        fetchRecruitmentDetail(recrutPblntSn);
+    });
+
+    async function fetchRecruitmentDetail(sn) {
+        const serviceKey = 'l52ySnIre43oyyECI/Cc1LCZz2eGjPrjJYmGJCif1sdG6Zmc9LDShVmXo2IFi4/ktWaDJz9PYsnVdoI4ceKKfg==';
+        const url = `https://apis.data.go.kr/1051000/recruitment/detail?serviceKey=${serviceKey}&sn=${sn}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.result) {
+                document.getElementById('recrutPbancTtl').textContent = data.result.recrutPbancTtl;
+                document.getElementById('instNm').textContent = data.result.instNm;
+                document.getElementById('recruitDate').textContent = `${data.result.pbancBgngYmd} ~ ${data.result.pbancEndYmd}`;
+                document.getElementById('ncsCdNmLst').textContent = data.result.ncsCdNmLst;
+                document.getElementById('replmprYn').textContent = data.result.replmprYn ? '예' : '아니오';
+                document.getElementById('hireTypeNmLst').textContent = data.result.hireTypeNmLst;
+                document.getElementById('acbgCondNmLst').textContent = data.result.acbgCondNmLst;
+                document.getElementById('workRgnNmLst').textContent = data.result.workRgnNmLst;
+                document.getElementById('aplyQlfcCn').textContent = data.result.aplyQlfcCn;
+                document.getElementById('disqlfcRsn').textContent = data.result.disqlfcRsn;
+                document.getElementById('prefCondCn').textContent = data.result.prefCondCn;
+                document.getElementById('prefCn').textContent = data.result.prefCn;
+                document.getElementById('scrnprcdrMthdExpln').textContent = data.result.scrnprcdrMthdExpln;
+                // 첨부 파일 정보 등을 추가로 처리합니다.
+            } else {
+                console.error('데이터가 없습니다.');
+            }
+        } catch (error) {
+            console.error('API 호출 중 오류 발생:', error);
+        }
+    }
+
+</script>
+</body>
+</html>

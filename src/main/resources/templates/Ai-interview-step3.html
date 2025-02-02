@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko" data-bs-theme="auto">
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>면접의 神</title>
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/blog/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#712cf9">
+    <style>
+        /* 기존 스타일 */
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .step-indicator div {
+            width: 30px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        .step-indicator .active {
+            background-color: #00f;
+            color: white;
+        }
+        .question-box {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 로딩 오버레이 스타일 추가 */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="border-bottom lh-1 py-3 mb-4">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1"></div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">
+                    <img src="/images/로고.png" alt="로고" style="max-width: 50%; height: auto;">
+                </a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <div class="dropdown me-2">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        마이페이지
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" th:href="@{/profile}">내 정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mock-interview}">모의면접 결과</a></li>
+                        <li><a class="dropdown-item" th:href="@{/change-password}">비밀번호 변경</a></li>
+                        <li><a class="dropdown-item text-danger" th:href="@{/delete-account}">회원 탈퇴</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+            </div>
+        </div>
+    </header>
+</div>
+<br>
+<div class="container content">
+    <div class="step-indicator">
+        <div>1</div>
+        <div>2</div>
+        <div class="active">3</div>
+        <div>4</div>
+    </div>
+    <div id="timer" class="timer">60</div>
+    <div id="question-box" class="question-box">면접 질문</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card" style="height: 500px;">
+                    <div class="card-body">
+                        <video id="video" width="100%" height="auto" autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-group">
+        <button id="start-button" class="btn btn-success">면접 시작</button>
+        <button id="next-button" class="btn btn-primary" disabled>다음 질문</button>
+        <button id="end-button" class="btn btn-danger" style="display: none;">면접 종료</button>
+    </div>
+</div>
+
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>분석 중입니다. 잠시만 기다려 주세요...</p>
+</div>
+
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between.align-items-center py-3 my-4 border-top">
+            <div class="container d-flex flex-column align-items-center">
+                <img src="/images/로고.png" alt="면접의 신 로고" class="img-fluid mb-3" style="max-width: 100px; height: auto;">
+                <div class="text-center text-body-secondary mt-3 d-flex flex-wrap justify-content-center">
+                    <div class="p-2">
+                        <p class="mb-0">프로젝트: 면접의 신</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">개발자: 김도균, 석재민</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">팀장: 김도균</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">연락처: 010-5627-3836</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const questionBox = document.getElementById("question-box");
+        const timer = document.getElementById("timer");
+        const startButton = document.getElementById("start-button");
+        const nextButton = document.getElementById("next-button");
+        const endButton = document.getElementById("end-button");
+        const videoElement = document.getElementById("video");
+        const loadingOverlay = document.getElementById("loadingOverlay");
+
+        // 서버에서 전달된 username 값을 JavaScript 변수로 설정
+        const userName = /*[[${username}]]*/ 'defaultUserName'; // 사용자 이름
+        const job = localStorage.getItem("selectedOccupation"); // Ai-interview-step2.html에서 저장한 직업 정보
+        const userId = /*[[${user_id}]]*/ 'defaultUserId';
+
+        let occupationName = new URLSearchParams(window.location.search).get("occupationName");
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let timeLeft = 60;
+        let countdown;
+        let mediaRecorder;
+        let recordedChunks = [];
+        let recordedChunksList = []; // 모든 질문의 녹화 파일을 저장할 배열
+        let recordingInProgress = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // 면접 질문을 불러오고 상위 5개만 선택하는 부분
+        if (occupationName) {
+            fetch(`/interview-questions?occupationName=${occupationName}`)
+                .then(response => response.json())
+                .then(data => {
+                    shuffleArray(data);  // 질문을 무작위로 섞음
+                    questions = data.slice(0, 5); // 상위 5개의 질문만 선택
+                    if (questions.length > 0) {
+                        questionBox.textContent = `1번 질문. ${questions[0].question}`;
+                    } else {
+                        questionBox.textContent = "해당 직업에 대한 질문이 없습니다.";
+                    }
+                });
+        }
+
+        // 타이머 시작 함수
+        function startTimer() {
+            timeLeft = 60;
+            countdown = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    nextButton.disabled = false;
+                    stopRecording().then(() => {
+                        nextQuestion();
+                    });
+                }
+                timer.textContent = timeLeft--;
+            }, 1000);
+        }
+
+        // 다음 질문으로 넘어가는 함수
+        function nextQuestion() {
+            if (currentQuestionIndex < 4) { // 총 5문제 제한
+                currentQuestionIndex++;
+                questionBox.textContent = `${currentQuestionIndex + 1}번 질문. ${questions[currentQuestionIndex].question}`;
+                timeLeft = 60;
+                timer.textContent = timeLeft;
+                startButton.disabled = false;
+                nextButton.disabled = true;
+            } else {
+                questionBox.textContent = "고생하셨습니다. 면접이 종료되었습니다. 면접 종료 버튼을 클릭하여 면접 결과를 확인하세요.";
+                nextButton.style.display = "none";
+                endButton.style.display = "inline-block";
+                endButton.disabled = false;
+            }
+        }
+
+        // 면접 시작 버튼 이벤트
+        startButton.addEventListener("click", function () {
+            startButton.disabled = true;
+            nextButton.disabled = false;
+            startTimer();
+            startRecording();
+        });
+
+        // 다음 질문 버튼 이벤트
+        nextButton.addEventListener("click", function () {
+            clearInterval(countdown);
+            stopRecording().then(() => {
+                nextQuestion();
+            });
+        });
+
+        // 면접 종료 버튼 이벤트
+        endButton.addEventListener("click", function () {
+            // 로딩 화면 표시
+            loadingOverlay.style.display = "flex";
+
+            if (recordingInProgress) {
+                // 녹화가 진행 중일 때 녹화를 중단하고 저장 후 면접 종료 실행
+                stopRecording().then(() => {
+                    endInterview();
+                });
+            } else {
+                // 녹화가 진행 중이 아닐 때 바로 면접 종료 실행
+                endInterview();
+            }
+        });
+
+
+        async function startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            videoElement.srcObject = stream;
+
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = function (event) {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+            mediaRecorder.onstop = function () {
+                saveRecording();
+            };
+            mediaRecorder.start();
+            recordingInProgress = true;
+        }
+
+        function stopRecording() {
+            return new Promise((resolve) => {
+                mediaRecorder.onstop = function () {
+                    saveRecording().then(() => {
+                        recordingInProgress = false;
+                        resolve();
+                    });
+                };
+                mediaRecorder.stop();
+            });
+        }
+
+        async function saveRecording() {
+            const blob = new Blob(recordedChunks, {
+                type: 'video/webm'
+            });
+            recordedChunks = []; // 새로운 질문을 위해 recordedChunks 초기화
+            recordedChunksList.push(blob); // 각 질문의 녹화 파일을 배열에 저장
+        }
+
+        async function endInterview() {
+            if (recordingInProgress) { // 녹화가 진행 중이면 중단하고 저장
+                await stopRecording();
+            }
+
+            // 모든 질문의 녹화 파일을 한 번에 전송
+            const formData = new FormData();
+            recordedChunksList.forEach((blob, index) => {
+                formData.append(`videoFile_${index + 1}`, blob, `recording_${index + 1}.webm`);
+            });
+
+            // 사용자 정보 및 선택된 5개 질문 추가
+            formData.append("userName", userName);
+            formData.append("job", job);
+            formData.append("user_id", userId);
+            questions.forEach((questionObj, index) => {
+                formData.append(`question_${index + 1}`, questionObj.question); // 질문 텍스트만 전송
+            });
+
+            try {
+                // 파일 업로드 요청
+                const uploadResponse = await fetch('http://localhost:5000/upload-files', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!uploadResponse.ok) {
+                    throw new Error('Failed to upload files');
+                }
+
+                // 감정 분석 요청
+                const emotionResponse = await fetch('http://localhost:5000/analyze-emotions', {
+                    method: 'POST'
+                });
+                if (!emotionResponse.ok) {
+                    throw new Error('Failed to analyze emotions');
+                }
+
+                // 시선 분석 요청
+                const gazeResponse = await fetch('http://localhost:5000/analyze-gaze', {
+                    method: 'POST'
+                });
+                if (!gazeResponse.ok) {
+                    throw new Error('Failed to analyze gaze');
+                }
+
+                // 습관어 분석 요청
+                const habitResponse = await fetch('http://localhost:5000/analyze-habit-words', {
+                    method: 'POST'
+                });
+                if (!habitResponse.ok) {
+                    throw new Error('Failed to analyze habit words');
+                }
+
+                // 모든 분석이 완료되었으므로 Spring 서버로 분석 결과 전송
+                const sendResponse = await fetch('http://localhost:5000/analyze-and-send', {
+                    method: 'POST'
+                });
+
+                if (!sendResponse.ok) {
+                    throw new Error('Failed to send analysis data to Spring server');
+                }
+
+                // 모든 작업이 성공적으로 완료되면 결과 페이지로 이동
+                window.location.href = '/Ai-interview-step4';
+
+            } catch (error) {
+                console.error('Error in interview process:', error);
+                alert("인터뷰 처리 중 오류가 발생했습니다. 다시 시도해주세요.");
+                loadingOverlay.style.display = "none";  // 오류 시 로딩 화면 숨기기
+            }
+        }
+
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>면접의 신</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .step-indicator div {
+            width: 30px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        .step-indicator .active {
+            background-color: #00f;
+            color: white;
+        }
+        .feedback-category {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .feedback-category h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #408CFF;
+        }
+        .feedback-grade {
+            font-weight: bold;
+            font-size: 20px;
+            color: #1E84FD;
+        }
+        .feedback-summary, .overall-feedback p, .feedback-guide {
+            font-size: 16px;
+            color: #555;
+        }
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: #888;
+        }
+        .overall-feedback {
+            font-size: 16px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="border-bottom lh-1 py-3 mb-4">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1"></div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">
+                    <img src="/images/로고.png" alt="로고" style="max-width: 50%; height: auto;">
+                </a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <div class="dropdown me-2">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        마이페이지
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" th:href="@{/profile}">내 정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mockinterview}">모의면접 결과</a></li>
+                        <li><a class="dropdown-item" th:href="@{/change-password}">비밀번호 변경</a></li>
+                        <li><a class="dropdown-item" th:href="@{/delete-account}">회원 탈퇴</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+            </div>
+        </div>
+    </header>
+</div>
+<div class="container content">
+    <div class="step-indicator">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div class="active">4</div>
+    </div>
+</div>
+<!-- 피드백 섹션 -->
+<div class="container feedback-section">
+    <h2>👉 '<span th:text="${userName}"></span>' 님의 분석 결과입니다!!</h2>
+    <p><strong>직업:</strong> <span th:text="${job}"></span> </p>
+
+    <!-- 표정 분석 -->
+    <section class="feedback-category">
+        <h3>표정 분석</h3>
+        <p class="feedback-grade">총 평가: <span th:text="${emotionRating}"></span></p>
+        <p class="feedback-guide">
+            면접 응답을 진행한 동안 측정된 영상에 대한 표정 분석 결과를 반환합니다. '화남', '혐오감', '두려움', '행복', '슬픔', '놀람', '중립'과 같은 표정을 분석하고
+            이에 대한 비율을 계산하여 응답 중 '행복' 이외에 표정 비중이 높은 문항을 기록합니다.
+        <h4>👇 연습이 필요한 문항 👇</h4>
+        <ul>
+            <li th:each="index : ${#strings.arraySplit(emotionPracticeNeeded, ',')}" th:text="${index}"></li>
+        </ul>
+        <h4>총 평 <span th:text="${emotionEncouragement}"></span></h4>
+        <p class="feedback-summary" th:text="${emotionSummary}"></p>
+    </section>
+
+    <!-- 시선 처리 -->
+    <section class="feedback-category">
+        <h3>시선 처리</h3>
+        <p class="feedback-grade">총 평가: <span th:text="${gazeRating}"></span></p>
+        <p class="feedback-guide">
+            면접 응답을 진행한 동안 측정된 영상에 대한 시선 처리 결과를 반환합니다. 중앙을 잘 응시하지 못하여 연습이 필요한 문항을 기록합니다.
+        <h4>👇 연습이 필요한 문항 👇</h4>
+        <ul>
+            <li th:each="index : ${#strings.arraySplit(gazePracticeNeeded, ',')}" th:text="${index}"></li>
+        </ul>
+        <h4>총 평 <span th:text="${gazeEncouragement}"></span></h4>
+        <p class="feedback-summary" th:text="${gazeSummary}"></p>
+    </section>
+
+    <!-- 습관어 처리 -->
+    <section class="feedback-category">
+        <h3>습관어 처리</h3>
+        <p class="feedback-grade">총 평가: <span th:text="${habitRating}"></span></p>
+        <p class="feedback-guide">
+            본 프로그램에서 측정되는 습관어는 '아', '아니', '그', '음', '어'와 같은 반복적인 단어입니다. 높은 빈도의 습관어 사용은 주의가 필요합니다.
+        <h4>상위 습관어 빈도</h4>
+        <ul>
+            <li th:each="word : ${#strings.arraySplit(habitTopWords, ',')}" th:text="${word}"></li>
+        </ul>
+        <h4>총 평 <span th:text="${habitEncouragement}"></span></h4>
+        <p class="feedback-summary" th:text="${habitSummary}"></p>
+    </section>
+
+    <!-- 종합 피드백 -->
+    <section class="overall-feedback">
+        <h3>전체적인 피드백</h3>
+        <p>
+            면접을 진행할 때 가장 중요한 점은 면접자의 '자신감'입니다. 자신의 의견을 분명하게 전달할 수 있도록 자신감 있는 말투와 표정을 거울을 통해 연습해주세요.
+            충분한 연습을 통해 AI 면접을 넘어 실제 면접관에게도 좋은 평가를 받을 수 있도록 지속적인 연습을 진행해주세요!
+        </p>
+        <p>
+            표정, 시선, 습관어와 같은 요소들은 면접에서 평가되어지는 주요 항목이 될 수 있습니다. 이러한 요소들이 여러분의 첫인상과 함께 면접 분위기를 결정할 수 있습니다.
+            연습을 통해 본인의 모습을 확인하고, 어떠한 습관어를 사용하고 있는지 인지해주세요. 여러 번의 연습은 앞으로의 더 좋은 면접 결과를 위한 발판이 되어줄 것입니다!
+        </p>
+        <p>면접의 신은 면접자님의 합격을 기원합니다!!</p>
+    </section>
+</div>
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="container d-flex flex-column align-items-center">
+                <img src="/images/로고.png" alt="면접의 신 로고" class="img-fluid mb-3" style="max-width: 100px; height: auto;">
+                <div class="text-center text-body-secondary mt-3 d-flex flex-wrap justify-content-center">
+                    <div class="p-2">
+                        <p class="mb-0">프로젝트: 면접의 신</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">개발자: 김도균, 석재민</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">팀장: 김도균</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">연락처: 010-5627-3836</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

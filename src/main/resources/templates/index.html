@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Blog Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/blog/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        header {
+            width: 100%; /* 전체 너비 */
+            max-width: 1200px; /* 바디와 동일한 최대 너비 설정 */
+            margin: 0 auto; /* 좌우 여백을 동일하게 중앙 정렬 */
+            padding: 1rem 2rem; /* 적절한 패딩 설정 */
+            border-bottom: 1px solid #ffffff; /* 하단 경계선 추가 */
+            position: fixed; /* 화면에 고정 */
+            top: 0; /* 상단 고정 */
+            left: 0; /* 화면 왼쪽 시작점 */
+            right: 0; /* 화면 오른쪽 끝점 */
+            background-color: white; /* 배경색 설정 */
+            z-index: 1000; /* 콘텐츠 위에 나타나도록 설정 */
+            display: flex; /* 플렉스 레이아웃 */
+            align-items: center; /* 세로 정렬 */
+            justify-content: space-between; /* 좌우 간격 설정 */
+        }
+
+        /* 바디 스타일 */
+        body {
+            max-width: 1200px; /* 바디 너비 제한 */
+            margin: 0 auto; /* 바디를 중앙 정렬 */
+            font-family: Arial, sans-serif; /* 폰트 설정 */
+            background-color: #ffffff; /* 배경색 */
+        }
+
+        /* 메인 콘텐츠 여백 */
+        main {
+            margin-top: 100px; /* 헤더 높이만큼 여백 추가 */
+        }
+
+        /* 로고 크기 */
+        .logo {
+            max-width: 100px; /* 로고 크기 제한 */
+            height: auto; /* 비율 유지 */
+        }
+
+        /* 중앙 메뉴 스타일 */
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* 메뉴 간격 */
+            font-size: 1rem;
+            font-weight: 500;
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
+
+        .carousel-image {
+            height: 200px; /* 원하는 높이로 설정 (예: 300px) */
+            object-fit: cover;
+        }
+
+
+        /* Top 버튼 스타일 */
+        /* Top 버튼 스타일 */
+        .top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: #ce0707;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 20px; /* 아이콘 크기 */
+            cursor: pointer;
+            display: none; /* 초기에는 숨김 */
+            transition: opacity 0.3s;
+        }
+
+        .top-button:hover {
+            background-color: #a00505;
+        }
+
+        .community-card {
+            border: 2px solid #000 !important; /* 기본 검정 테두리 */
+            transition: border-color 0.3s !important;
+        }
+
+        /* 호버 시 테두리 색 변경 */
+        .community-card:hover {
+            border-color: #ce0707 !important; /* 호버 시 테두리 색 변경 */
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        .dropdown-menu-custom {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        /* 카드 호버 시 효과 */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ce0707;
+        }
+
+        .btn-primary {
+            background-color: #ce0707;
+            border-color: #ce0707;
+        }
+
+        /* 테이블 행 기본 스타일 */
+        table tr {
+            transition: background-color 0.3s; /* 부드러운 색 변화 효과 */
+        }
+
+        /* 마우스를 올릴 때 색상 변경 */
+        table tr:hover {
+            background-color: #f1f1f1; /* 원하는 색상으로 변경 */
+            cursor: pointer;
+        }
+        .results-table {
+            width: 100%;
+            text-align: center;
+            border: 2px solid #000; /* 전체 테이블 검은색 테두리 */
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            vertical-align: middle;
+            font-size: 0.9rem;
+            border: 1px solid #000;
+            white-space: nowrap;
+        }
+
+        /* 행 전체에 호버 효과 */
+        .results-table tbody tr:hover {
+            background-color: #a91f1f !important; /* 호버 시 행 전체의 배경색 변경 */
+            transition: background-color 0.3s;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .results-table tbody tr:hover {
+            background-color: #f8d7da; /* 행 전체 호버 시 색상 */
+            transition: background-color 0.3s; /* 부드러운 전환 효과 */
+        }
+
+        /* 테이블 페이징 영역 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #ce0707;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #ce0707;
+        }
+
+        .pagination .page-info {
+            margin-right: 10px;
+            align-self: center;
+        }
+
+        /* 조회된 결과의 총 개수 표시 */
+        .results-count {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .search-filters label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .search-filters .form-select,
+        .search-filters .form-control {
+            border: 2px solid #000000;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        /* 간격 조정 */
+        .search-filters .row {
+            margin-bottom: 20px;
+        }
+
+        /* 폰트 크기와 스타일 조정 */
+        .search-filters label {
+            font-size: 18px;
+        }
+
+        .search-filters input::placeholder {
+            color: #6c757d;
+        }
+
+        /* hover 효과 추가 */
+        .search-filters .form-select:hover,
+        .search-filters .form-control:hover {
+            border-color: #ce0707;
+            box-shadow: 0px 0px 5px rgb(206, 7, 7);
+        }
+
+        /* 버튼 디자인 향상 */
+        .search-filters button {
+            background-color: #ce0707;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .search-filters button:hover {
+            background-color: #ce0707;
+        }
+
+        #searchBtn {
+            background-color: #ce0707; /* 초록색 배경 */
+            color: white; /* 글자 색 흰색 */
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #searchBunRe {
+            background-color: #6c757d; /* 초록색 배경 */
+            color: #ffffff; /* 글자 색 흰색 */
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #searchBtn:hover {
+            background-color: #af0606; /* hover 시 더 짙은 초록색 */
+        }
+
+        .small-image {
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* 카드 링크 스타일 */
+        .card-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .card-link:hover {
+            text-decoration: none;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+        }
+
+        .card-body:first-of-type {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* 툴 카드 간격 및 크기 조정 */
+        .tool-card {
+            width: 18%; /* 각 카드의 너비를 고정 */
+            min-width: 150px; /* 최소 너비 설정 */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tool-card img {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ce0707;
+        }
+
+        .tool-card {
+            width: 18%; /* 카드의 너비를 설정 */
+            min-width: 150px; /* 최소 너비 설정 */
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-icon {
+            width: 50px; /* 아이콘 크기 */
+            height: 50px; /* 아이콘 크기 */
+            object-fit: contain;
+        }
+
+        .tool-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <!-- 헤더 -->
+    <header class="d-flex justify-content-between align-items-center">
+        <!-- 로고 -->
+        <div class="d-flex align-items-center">
+            <a href="/" class="text-decoration-none">
+                <img src="/images/로고.png" alt="로고" class="logo">
+            </a>
+        </div>
+
+        <!-- 중앙 메뉴 -->
+        <div class="nav-center">
+            <a class="nav-link link-body-emphasis" href="/Ai-interview-step1">AI 모의면접</a>|
+            <a class="nav-link link-body-emphasis" href="/community">커뮤니티</a>
+        </div>
+
+        <!-- 로그인/회원가입 및 마이페이지 -->
+        <div class="d-flex align-items-center">
+            <div th:if="${isAuthenticated}" class="d-flex align-items-center">
+
+                <div class="dropdown me-2">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        마이페이지
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-custom">
+                        <li><a class="dropdown-item" th:href="@{/profile}">내 정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mockinterview}">모의면접 결과</a></li>
+                        <li><a class="dropdown-item" th:href="@{/change-password}">비밀번호 변경</a></li>
+                        <li><a class="dropdown-item" th:href="@{/delete-account}">회원 탈퇴</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+            </div>
+            <div th:if="${!isAuthenticated}">
+                <a class="btn btn-sm btn-outline-secondary me-2" th:href="@{/login}">로그인</a>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/register}">회원가입</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <div id="carouselExampleAutoplaying" class="carousel slide mt-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/배너1.png" class="d-block w-100 carousel-image" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/배너2.png" class="d-block w-100 carousel-image" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/배너3.png" class="d-block w-100 carousel-image" alt="Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/배너4.png" class="d-block w-100 carousel-image" alt="Image 4">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">이전</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">다음</span>
+            </button>
+        </div>
+        <br>
+        <hr>
+        <div class="container mt-5">
+            <h1 class="page-title text-center mb-4">커뮤니티</h1>
+
+            <div class="row g-4">
+                <div th:each="post : ${latestPosts}" class="col-md-6 col-lg-4">
+                    <!-- 카드 전체를 클릭하여 상세 페이지로 이동 -->
+                    <a th:href="'/community/view/' + ${post.id}" class="text-decoration-none card-link">
+                        <div class="card community-card h-100 shadow-sm border-0">
+                            <div class="card-body d-flex align-items-center">
+                                <!-- 제목과 내용 -->
+                                <div class="flex-grow-1">
+                                    <h5 class="card-title text-dark mb-1" th:text="${post.title}"></h5>
+                                    <p class="card-text text-muted mb-0"
+                                       th:text="${#strings.abbreviate(post.content, 15)}"></p>
+                                </div>
+
+                                <!-- 이미지 (있는 경우에만) -->
+                                <div th:if="${post.filePath != null}">
+                                    <img th:src="@{${post.filePath}}" alt="Post Image" class="small-image ms-3"
+                                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <hr>
+
+        <div class="container mt-4">
+            <h1 class="page-title text-center">채용공고 조회</h1>
+
+            <div class="search-filters mb-4">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="instType">기관유형</label>
+                        <select id="instType" class="form-select">
+                            <option value="">전체</option>
+                            <option value="A2001">공기업(시장형)</option>
+                            <option value="A2002">공기업(준시장형)</option>
+                            <option value="A2003">준정부기관(기금관리형)</option>
+                            <option value="A2004">준정부기관(위탁집행형)</option>
+                            <option value="A2005">기타공공기관</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="instClsf">기관분류</label>
+                        <select id="instClsf" class="form-select">
+                            <option value="">전체</option>
+                            <option value="01">SOC</option>
+                            <option value="02">금융</option>
+                            <option value="03">에너지</option>
+                            <option value="04">고용보건복지</option>
+                            <option value="05">문화예술외교법무</option>
+                            <option value="06">농림수산환경</option>
+                            <option value="07">산업진흥정보화</option>
+                            <option value="08">연구교육</option>
+                            <option value="99">기타</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inst">기관</label>
+                        <select id="inst" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="C0031">국제방송교류재단</option>
+
+                            <option value="C0866">국제식물검역인증원</option>
+
+                            <option value="C0318">국토교통과학기술진흥원</option>
+
+                            <option value="C0032">국토연구원</option>
+
+                            <option value="C0357">그랜드코리아레저(주)</option>
+
+                            <option value="C0035">근로복지공단</option>
+
+                            <option value="C0038">기술보증기금</option>
+
+                            <option value="C0856">기초과학연구원</option>
+
+                            <option value="C0173">노사발전재단</option>
+
+                            <option value="C0860">농림수산식품교육문화정보원</option>
+
+                            <option value="C0404">농림식품기술기획평가원</option>
+
+                            <option value="C0422">한국농업기술진흥원</option>
+
+                            <option value="C0542">농업정책보험금융원</option>
+
+                            <option value="C0049">대구경북과학기술원</option>
+
+                            <option value="C0894">대구경북첨단의료산업진흥재단</option>
+
+                            <option value="C0051">대외경제정책연구원</option>
+
+                            <option value="C0054">대한무역투자진흥공사</option>
+
+                            <option value="C0055">대한법률구조공단</option>
+
+                            <option value="C0057">대한석탄공사</option>
+
+                            <option value="C0315">대한장애인체육회</option>
+
+                            <option value="C0059">대한적십자사</option>
+
+                            <option value="C0063">대한체육회</option>
+
+                            <option value="C0064">한국도로교통공단</option>
+
+                            <option value="C0065">독립기념관</option>
+
+                            <option value="C0358">동북아역사재단</option>
+
+                            <option value="C0068">민주화운동기념사업회</option>
+
+                            <option value="C0069">별정우체국연금관리단</option>
+
+                            <option value="C0071">부산대학교병원</option>
+
+                            <option value="C0853">부산대학교치과병원</option>
+
+                            <option value="C0072">부산항만공사</option>
+
+                            <option value="C0449">북한이탈주민지원재단</option>
+
+                            <option value="C0893">사단법인 한국기술자격검정원</option>
+
+                            <option value="C1059">사단법인 한국산학연협회</option>
+
+                            <option value="C0075">사립학교교직원연금공단</option>
+
+                            <option value="C0411">한국사회보장정보원</option>
+
+                            <option value="C0078">산업연구원</option>
+
+                            <option value="C1046">서민금융진흥원</option>
+
+                            <option value="C0083">서울대학교병원</option>
+
+                            <option value="C0084">서울대학교치과병원</option>
+
+                            <option value="C0029">서울올림픽기념국민체육진흥공단</option>
+
+                            <option value="C0087">한국해양교통안전공단</option>
+
+                            <option value="C0867">세종학당재단</option>
+
+                            <option value="C0903">소상공인시장진흥공단</option>
+
+                            <option value="C0089">수도권매립지관리공사</option>
+
+                            <option value="C1033">시청자미디어재단</option>
+
+                            <option value="C0661">식품안전정보원</option>
+
+                            <option value="C0091">신용보증기금</option>
+
+                            <option value="C0112">신용보증재단중앙회</option>
+
+                            <option value="C0869">아시아문화원(22.01.17 해산)</option>
+
+                            <option value="C0223">한국수출입은행</option>
+
+                            <option value="C0224">한국승강기안전공단</option>
+
+                            <option value="C0225">국토안전관리원</option>
+
+                            <option value="C1100">한국식품안전관리인증원</option>
+
+                            <option value="C0226">한국식품연구원</option>
+
+                            <option value="C0594">한국양성평등교육진흥원</option>
+
+                            <option value="C0335">한국어촌어항공단</option>
+
+                            <option value="C0412">한국언론진흥재단</option>
+
+                            <option value="C0097">한국에너지공단</option>
+
+                            <option value="C0229">한국에너지기술연구원</option>
+
+                            <option value="C0389">한국에너지기술평가원</option>
+
+                            <option value="C0233">한국에너지정보문화재단</option>
+
+                            <option value="C0902">한국여성인권진흥원</option>
+
+                            <option value="C0231">한국여성정책연구원</option>
+
+                            <option value="C0388">한국연구재단</option>
+
+                            <option value="C0232">한국영상자료원</option>
+
+                            <option value="C0868">한국예술인복지재단</option>
+
+                            <option value="C0131">한국예탁결제원</option>
+
+                            <option value="C0234">한국원자력안전기술원</option>
+
+                            <option value="C0932">한국원자력안전재단</option>
+
+                            <option value="C0235">한국원자력연구원</option>
+
+                            <option value="C0104">한국원자력의학원</option>
+
+                            <option value="C0020">한국원자력통제기술원</option>
+
+                            <option value="C0371">한국원자력환경공단</option>
+
+                            <option value="C0865">한국의료기기안전정보원</option>
+
+                            <option value="C0870">한국의료분쟁조정중재원</option>
+
+                            <option value="C0862">한국의약품안전관리원</option>
+
+                            <option value="C0399">한국인터넷진흥원</option>
+
+                            <option value="C0857">한국임업진흥원</option>
+
+                            <option value="C0240">한국자산관리공사</option>
+
+                            <option value="C0859">한국잡월드</option>
+
+                            <option value="C0243">한국장애인개발원</option>
+
+                            <option value="C0242">한국장애인고용공단</option>
+
+                            <option value="C0415">한국장학재단</option>
+
+                            <option value="C1042">한국재정정보원</option>
+
+                            <option value="C1049">한국저작권보호원</option>
+
+                            <option value="C0390">한국저작권위원회</option>
+
+                            <option value="C0244">한국전기안전공사</option>
+
+                            <option value="C0245">한국전기연구원</option>
+
+                            <option value="C0246">한국전력거래소</option>
+
+                            <option value="C1318">재단법인 건설기술교육원</option>
+
+                            <option value="C1324">국립항공박물관</option>
+
+                            <option value="C1327">공간정보품질관리원</option>
+
+                            <option value="C1333">국립해양과학관</option>
+
+                            <option value="C1334">국립호남권생물자원관</option>
+
+                            <option value="C1330">차세대수치예보모델개발사업단</option>
+
+                            <option value="C1319">한국고용노동교육원</option>
+
+                            <option value="C1294">한국도로공사서비스(주)</option>
+
+                            <option value="C1352">한전MCS(주)</option>
+
+                            <option value="C0344">국립박물관문화재단</option>
+
+                            <option value="C1051">국립부산과학관</option>
+
+                            <option value="C0879">국립생태원</option>
+
+                            <option value="C0023">국립암센터</option>
+
+                            <option value="C0446">국립중앙의료원</option>
+
+                            <option value="C1016">국립해양박물관</option>
+
+                            <option value="C1021">국립해양생물자원관</option>
+
+                            <option value="C0026">국민건강보험공단</option>
+
+                            <option value="C0028">국민연금공단</option>
+
+                            <option value="C0345">국방과학연구소</option>
+
+                            <option value="C0347">국방기술품질원</option>
+
+                            <option value="C1030">(재)축산환경관리원</option>
+
+                            <option value="C1303">아동권리보장원</option>
+
+                            <option value="C0861">재단법인 한국자활복지개발원</option>
+
+                            <option value="C0844">한국등산·트레킹지원센터</option>
+
+                            <option value="C1119">한국해양진흥공사</option>
+
+                            <option value="C1131">한국해외인프라도시개발지원공사</option>
+
+                            <option value="C0247">한국전력공사</option>
+
+                            <option value="C1070">한국전력국제원자력대학원대학교</option>
+
+                            <option value="C0248">한국전력기술주식회사</option>
+
+                            <option value="C0251">한국전자통신연구원</option>
+
+                            <option value="C0392">한국지능정보사회진흥원</option>
+
+                            <option value="C0256">한국조세재정연구원</option>
+
+                            <option value="C0257">한국조폐공사</option>
+
+                            <option value="C0258">한국주택금융공사</option>
+
+                            <option value="C0259">한국중부발전(주)</option>
+
+                            <option value="C0416">한국지식재산보호원</option>
+
+                            <option value="C0407">한국지식재산연구원</option>
+
+                            <option value="C0261">한국지역난방공사</option>
+
+                            <option value="C0263">한국지질자원연구원</option>
+
+                            <option value="C0264">한국직업능력연구원</option>
+
+                            <option value="C0266">한국천문연구원</option>
+
+                            <option value="C0268">한국철도공사</option>
+
+                            <option value="C1120">국가생명윤리정책원</option>
+
+                            <option value="C1138">한국식품산업클러스터진흥원</option>
+
+                            <option value="C1130">새만금개발공사</option>
+
+                            <option value="C1102">재단법인 한국공공조직은행</option>
+
+                            <option value="C1127">한국수자원조사기술원</option>
+
+                            <option value="C0269">한국철도기술연구원</option>
+
+                            <option value="C0270">국가철도공단</option>
+
+                            <option value="C0278">한국청소년상담복지개발원</option>
+
+                            <option value="C0276">한국청소년정책연구원</option>
+
+                            <option value="C0447">한국청소년활동진흥원</option>
+
+                            <option value="C0280">한국체육산업개발(주)</option>
+
+                            <option value="C0149">한국출판문화산업진흥원</option>
+
+                            <option value="C0395">한국콘텐츠진흥원</option>
+
+                            <option value="C0396">한국토지주택공사</option>
+
+                            <option value="C0284">한국투자공사</option>
+
+                            <option value="C0899">한국특허전략개발원</option>
+
+                            <option value="C0340">한국특허정보원</option>
+
+                            <option value="C0286">한국표준과학연구원</option>
+
+                            <option value="C0290">한국학중앙연구원</option>
+
+                            <option value="C0291">한국한의학연구원</option>
+
+                            <option value="C0292">한국항공우주연구원</option>
+
+                            <option value="C0373">한국항로표지기술원</option>
+
+                            <option value="C0297">한국해양과학기술원</option>
+
+                            <option value="C0295">한국해양수산개발원</option>
+
+                            <option value="C0296">한국해양수산연수원</option>
+
+                            <option value="C0654">한국해양조사협회</option>
+
+                            <option value="C0298">한국행정연구원</option>
+
+                            <option value="C0299">한국형사·법무정책연구원</option>
+
+                            <option value="C0300">한국화학연구원</option>
+
+                            <option value="C0400">한국환경공단</option>
+
+                            <option value="C0391">한국환경산업기술원</option>
+
+                            <option value="C0302">한국환경연구원</option>
+
+                            <option value="C1053">한국한의약진흥원</option>
+
+                            <option value="C0306">한전KDN</option>
+
+                            <option value="C0305">한전KPS(주)</option>
+
+                            <option value="C0236">한전원자력연료주식회사</option>
+
+                            <option value="C0900">항공안전기술원</option>
+
+                            <option value="C0374">해양수산과학기술진흥원</option>
+
+                            <option value="C0533">해양환경공단</option>
+
+                            <option value="C1062">한국환경보전원</option>
+
+                            <option value="C0441">국가수리과학연구소</option>
+
+                            <option value="C0906">소프트웨어정책연구소</option>
+
+                            <option value="C0908">정보통신기획평가원</option>
+
+                            <option value="C0858">한국특허기술진흥원</option>
+
+                            <option value="C0384">안전성평가연구소</option>
+
+                            <option value="C0383">극지연구소</option>
+
+                            <option value="C0905">선박해양플랜트연구소</option>
+
+                            <option value="C0431">세계김치연구소</option>
+
+                            <option value="C0382">한국핵융합에너지연구원</option>
+
+                            <option value="C0381">한국재료연구원</option>
+
+                            <option value="C0385">고등과학원</option>
+
+                            <option value="C0436">나노종합기술원</option>
+
+                            <option value="C0938">한국과학영재학교</option>
+
+                            <option value="C0878">국가녹색기술연구소</option>
+
+                            <option value="C0457">국가과학기술인력개발원</option>
+
+                            <option value="C0437">KDI국제정책대학원</option>
+
+                            <option value="C0448">동남권원자력의학원</option>
+
+                            <option value="C0444">분당서울대학교병원</option>
+
+                            <option value="C0877">한국뇌연구원</option>
+
+                            <option value="C0438">건축공간연구원</option>
+
+                            <option value="C0459">국민건강보험공단 일산병원</option>
+
+                            <option value="C0939">서울요양원</option>
+
+                            <option value="C0440">육아정책연구소</option>
+
+                            <option value="C0096">에너지경제연구원</option>
+
+                            <option value="C0281">여수광양항만공사</option>
+
+                            <option value="C0050">연구개발특구진흥재단</option>
+
+                            <option value="C0098">영상물등급위원회</option>
+
+                            <option value="C0099">영화진흥위원회</option>
+
+                            <option value="C0101">예금보험공사</option>
+
+                            <option value="C0102">예술의전당</option>
+
+                            <option value="C0896">오송첨단의료산업진흥재단</option>
+
+                            <option value="C0664">울산과학기술원</option>
+
+                            <option value="C0365">울산항만공사</option>
+
+                            <option value="C1063">의료법인 한전의료재단 한일병원</option>
+
+                            <option value="C0105">인천국제공항공사</option>
+
+                            <option value="C0107">인천항만공사</option>
+
+                            <option value="C0406">재단법인 국악방송</option>
+
+                            <option value="C1108">재단법인 대한건설기계안전관리원</option>
+
+                            <option value="C1064">의료기관평가인증원</option>
+
+                            <option value="C1017">재단법인 장애인기업종합지원센터</option>
+
+                            <option value="C1109">재단법인 한국에너지재단</option>
+
+                            <option value="C0901">한국여성과학기술인육성재단</option>
+
+                            <option value="C1103">재단법인 한국장기조직기증원</option>
+
+                            <option value="C0110">재외동포재단</option>
+
+                            <option value="C0113">전남대학교병원</option>
+
+                            <option value="C0367">전략물자관리원</option>
+
+                            <option value="C0114">전북대학교병원</option>
+
+                            <option value="C0115">전쟁기념사업회</option>
+
+                            <option value="C0394">정보통신산업진흥원</option>
+
+                            <option value="C0120">정보통신정책연구원</option>
+
+                            <option value="C0376">정부법무공단</option>
+
+                            <option value="C0121">제주국제자유도시개발센터</option>
+
+                            <option value="C0122">제주대학교병원</option>
+
+                            <option value="C1024">(주)공영홈쇼핑</option>
+
+                            <option value="C0364">주식회사 부산항보안공사</option>
+
+                            <option value="C1044">주식회사 에스알</option>
+
+                            <option value="C0366">주식회사 인천항보안공사</option>
+
+                            <option value="C0124">주택관리공단(주)</option>
+
+                            <option value="C0061">주택도시보증공사</option>
+
+                            <option value="C0129">중소기업기술정보진흥원</option>
+
+                            <option value="C0126">중소기업유통센터</option>
+
+                            <option value="C0127">중소기업은행</option>
+
+                            <option value="C0130">중소벤처기업진흥공단</option>
+
+                            <option value="C0451">창업진흥원</option>
+
+                            <option value="C0134">축산물품질평가원</option>
+
+                            <option value="C0135">충남대학교병원</option>
+
+                            <option value="C0136">충북대학교병원</option>
+
+                            <option value="C0314">코레일관광개발(주)</option>
+
+                            <option value="C0327">코레일네트웍스(주)</option>
+
+                            <option value="C0140">코레일로지스(주)</option>
+
+                            <option value="C0272">코레일유통(주)</option>
+
+                            <option value="C0387">코레일테크(주)</option>
+
+                            <option value="C0409">태권도진흥재단</option>
+
+                            <option value="C0141">통일연구원</option>
+
+                            <option value="C0144">학교법인한국폴리텍</option>
+
+                            <option value="C0147">한국가스공사</option>
+
+                            <option value="C0148">한국가스안전공사</option>
+
+                            <option value="C0150">한국부동산원</option>
+
+                            <option value="C0151">한국개발연구원</option>
+
+                            <option value="C0845">한국건강가정진흥원</option>
+
+                            <option value="C0854">한국건강증진개발원</option>
+
+                            <option value="C0154">한국건설기술연구원</option>
+
+                            <option value="C0321">한국고용정보원</option>
+
+                            <option value="C0067">한국고전번역원</option>
+
+                            <option value="C0452">한국공예디자인문화진흥원</option>
+
+                            <option value="C0655">한국공정거래조정원</option>
+
+                            <option value="C0157">한국공항공사</option>
+
+                            <option value="C0158">한국과학기술기획평가원</option>
+
+                            <option value="C0159">한국과학기술연구원</option>
+
+                            <option value="C0160">한국과학기술원</option>
+
+                            <option value="C0161">한국과학기술정보연구원</option>
+
+                            <option value="C0163">한국과학창의재단</option>
+
+                            <option value="C0165">한국관광공사</option>
+
+                            <option value="C0053">한국광물자원공사(21.09.10 해산)</option>
+
+                            <option value="C0086">한국광해관리공단(21.09.10 해산)</option>
+
+                            <option value="C0167">한국교육개발원</option>
+
+                            <option value="C0168">한국교육과정평가원</option>
+
+                            <option value="C0145">한국교육학술정보원</option>
+
+                            <option value="C0019">한국교통안전공단</option>
+
+                            <option value="C0170">한국교통연구원</option>
+
+                            <option value="C0171">한국국방연구원</option>
+
+                            <option value="C0172">한국국제교류재단</option>
+
+                            <option value="C0379">한국국제보건의료재단</option>
+
+                            <option value="C0146">한국국제협력단</option>
+
+                            <option value="C0062">한국국토정보공사</option>
+
+                            <option value="C0174">한국기계연구원</option>
+
+                            <option value="C0864">한국기상산업기술원</option>
+
+                            <option value="C0175">한국기술교육대학교</option>
+
+                            <option value="C0177">한국기초과학지원연구원</option>
+
+                            <option value="C0631">한국나노기술원</option>
+
+                            <option value="C0042">한국남동발전(주)</option>
+
+                            <option value="C0043">한국남부발전(주)</option>
+
+                            <option value="C0179">한국노동연구원</option>
+
+                            <option value="C0378">한국노인인력개발원</option>
+
+                            <option value="C0045">한국농수산식품유통공사</option>
+
+                            <option value="C0046">한국농어촌공사</option>
+
+                            <option value="C0181">한국농촌경제연구원</option>
+
+                            <option value="C0527">한국데이터산업진흥원</option>
+
+                            <option value="C0183">한국도로공사</option>
+
+                            <option value="C0922">한국도박문제예방치유원</option>
+
+                            <option value="C0066">한국동서발전(주)</option>
+
+                            <option value="C0184">한국디자인진흥원</option>
+
+                            <option value="C0450">한국로봇산업진흥원</option>
+
+                            <option value="C0185">한국마사회</option>
+
+                            <option value="C0222">한국무역보험공사</option>
+
+                            <option value="C0188">한국문학번역원</option>
+
+                            <option value="C0189">한국문화관광연구원</option>
+
+                            <option value="C0320">한국문화예술교육진흥원</option>
+
+                            <option value="C0190">한국문화예술위원회</option>
+
+                            <option value="C0191">국가유산진흥원</option>
+
+                            <option value="C0663">한국문화정보원</option>
+
+                            <option value="C0192">한국문화진흥주식회사</option>
+
+                            <option value="C0348">한국발명진흥회</option>
+
+                            <option value="C0196">한국방송광고진흥공사</option>
+
+                            <option value="C0187">한국방송통신전파진흥원</option>
+
+                            <option value="C0152">한국법무보호복지공단</option>
+
+                            <option value="C0198">한국법제연구원</option>
+
+                            <option value="C0199">한국벤처투자</option>
+
+                            <option value="C0070">한국보건복지인재원</option>
+
+                            <option value="C0200">한국보건사회연구원</option>
+
+                            <option value="C1027">국방전직교육원</option>
+
+                            <option value="C0571">한국마약퇴치운동본부</option>
+
+                            <option value="C1060">(재)한국통계정보원</option>
+
+                            <option value="C1383">재외동포협력센터</option>
+
+                            <option value="C1386">한국치산기술협회</option>
+
+                            <option value="C1304">(재)한국보건의료정보원</option>
+
+                            <option value="C1364">한국광해광업공단</option>
+
+                            <option value="C1124">한국제품안전관리원</option>
+
+                            <option value="C1368">한국탄소산업진흥원</option>
+
+                            <option value="C0201">한국보건산업진흥원</option>
+
+                            <option value="C0662">한국보건의료연구원</option>
+
+                            <option value="C0202">한국보건의료인국가시험원</option>
+
+                            <option value="C0849">한국보육진흥원</option>
+
+                            <option value="C0203">한국보훈복지의료공단</option>
+
+                            <option value="C0205">한국사학진흥재단</option>
+
+                            <option value="C0377">한국사회복지협의회</option>
+
+                            <option value="C0456">한국사회적기업진흥원</option>
+
+                            <option value="C1055">한국산림복지진흥원</option>
+
+                            <option value="C0076">한국산업기술시험원</option>
+
+                            <option value="C0393">한국산업기술진흥원</option>
+
+                            <option value="C0397">한국산업기술기획평가원</option>
+
+                            <option value="C0208">한국산업단지공단</option>
+
+                            <option value="C0209">한국산업안전보건공단</option>
+
+                            <option value="C0210">한국산업은행</option>
+
+                            <option value="C0211">한국산업인력공단</option>
+
+                            <option value="C0620">한국상하수도협회</option>
+
+                            <option value="C0212">한국생명공학연구원</option>
+
+                            <option value="C0213">한국생산기술연구원</option>
+
+                            <option value="C0082">한국서부발전(주)</option>
+
+                            <option value="C0214">한국석유공사</option>
+
+                            <option value="C0215">한국석유관리원</option>
+
+                            <option value="C0103">한국세라믹기술원</option>
+
+                            <option value="C0217">한국소방산업기술원</option>
+
+                            <option value="C0218">한국소비자원</option>
+
+                            <option value="C0220">한국수력원자력(주)</option>
+
+                            <option value="C1107">한국수목원정원관리원</option>
+
+                            <option value="C0455">한국수산자원공단</option>
+
+                            <option value="C0221">한국수자원공사</option>
+
+                            <option value="C0847">(사)남북교류협력지원협회</option>
+
+                            <option value="C0918">(재)APEC기후센터</option>
+
+                            <option value="C0916">한국원산지정보원</option>
+
+                            <option value="C0454">(재)예술경영지원센터</option>
+
+                            <option value="C0352">(재)우체국금융개발원</option>
+
+                            <option value="C0331">(재)우체국물류지원단</option>
+
+                            <option value="C0368">(재)우체국시설관리단</option>
+
+                            <option value="C0931">(재)일제강제동원피해자지원재단</option>
+
+                            <option value="C0116">(재)정동극장</option>
+
+                            <option value="C0884">중소벤처기업연구원</option>
+
+                            <option value="C0881">(재)한국스마트그리드사업단</option>
+
+                            <option value="C0354">(재)한국우편사업진흥원</option>
+
+                            <option value="C0919">(재)한국형수치예보모델개발사업단</option>
+
+                            <option value="C0920">한식진흥원</option>
+
+                            <option value="C0005">(주)강원랜드</option>
+
+                            <option value="C0840">수자원환경산업진흥(주)</option>
+
+                            <option value="C0125">(주)한국가스기술공사</option>
+
+                            <option value="C0153">(주)한국건설관리공사</option>
+
+                            <option value="C0001">88관광개발(주)</option>
+
+                            <option value="C0926">이민정책연구원</option>
+
+                            <option value="C0002">가축위생방역지원본부</option>
+
+                            <option value="C0003">강릉원주대학교치과병원</option>
+
+                            <option value="C0004">강원대학교병원</option>
+
+                            <option value="C0006">건강보험심사평가원</option>
+
+                            <option value="C0672">건설근로자공제회</option>
+
+                            <option value="C0402">게임물관리위원회</option>
+
+                            <option value="C0008">경북대학교병원</option>
+
+                            <option value="C1031">경북대학교치과병원</option>
+
+                            <option value="C0009">경상국립대학교병원</option>
+
+                            <option value="C0010">경제인문사회연구회</option>
+
+                            <option value="C0013">공무원연금공단</option>
+
+                            <option value="C1038">과학기술사업화진흥원</option>
+
+                            <option value="C0017">과학기술정책연구원</option>
+
+                            <option value="C0018">광주과학기술원</option>
+
+                            <option value="C0909">국가과학기술연구회</option>
+
+                            <option value="C0410">국가평생교육진흥원</option>
+
+                            <option value="C0021">국립공원공단</option>
+
+                            <option value="C0923">국립광주과학관</option>
+
+                            <option value="C1018">국립낙동강생물자원관</option>
+
+                            <option value="C0924">국립대구과학관</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ncsCdLst">채용분야</label>
+                        <select id="ncsCdLst" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="R600001">사업관리</option>
+
+                            <option value="R600002">경영.회계.사무</option>
+
+                            <option value="R600003">금융.보험</option>
+
+                            <option value="R600004">교육.자연.사회과학</option>
+
+                            <option value="R600005">법률.경찰.소방.교도.국방</option>
+
+                            <option value="R600006">보건.의료</option>
+
+                            <option value="R600007">사회복지.종교</option>
+
+                            <option value="R600008">문화.예술.디자인.방송</option>
+
+                            <option value="R600009">운전.운송</option>
+
+                            <option value="R600010">영업판매</option>
+
+                            <option value="R600011">경비.청소</option>
+
+                            <option value="R600012">이용.숙박.여행.오락.스포츠</option>
+
+                            <option value="R600013">음식서비스</option>
+
+                            <option value="R600014">건설</option>
+
+                            <option value="R600015">기계</option>
+
+                            <option value="R600016">재료</option>
+
+                            <option value="R600017">화학</option>
+
+                            <option value="R600018">섬유.의복</option>
+
+                            <option value="R600019">전기.전자</option>
+
+                            <option value="R600020">정보통신</option>
+
+                            <option value="R600021">식품가공</option>
+
+                            <option value="R600022">인쇄.목재.가구.공예</option>
+
+                            <option value="R600023">환경.에너지.안전</option>
+
+                            <option value="R600024">농림어업</option>
+
+                            <option value="R600025">연구</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="workRgnLst">근무지</label>
+                        <select id="workRgnLst" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="R3010">서울</option>
+
+                            <option value="R3011">인천</option>
+
+                            <option value="R3012">대전</option>
+
+                            <option value="R3013">대구</option>
+
+                            <option value="R3014">부산</option>
+
+                            <option value="R3015">광주</option>
+
+                            <option value="R3016">울산</option>
+
+                            <option value="R3017">경기</option>
+
+                            <option value="R3018">강원</option>
+
+                            <option value="R3019">충남</option>
+
+                            <option value="R3020">충북</option>
+
+                            <option value="R3021">경북</option>
+
+                            <option value="R3022">경남</option>
+
+                            <option value="R3023">전남</option>
+
+                            <option value="R3024">전북</option>
+
+                            <option value="R3025">제주</option>
+
+                            <option value="R3026">세종</option>
+
+                            <option value="R3030">해외</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="acbgCondLst">필요학력</label>
+                        <select id="acbgCondLst" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="R7010">학력무관</option>
+
+                            <option value="R7020">중졸이하</option>
+
+                            <option value="R7030">고졸</option>
+
+                            <option value="R7040">대졸(2~3년)</option>
+
+                            <option value="R7050">대졸(4년)</option>
+
+                            <option value="R7060">석사</option>
+
+                            <option value="R7070">박사</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-2">
+                        <label for="hireType">고용형태</label>
+                        <select id="hireType" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="R1010">정규직</option>
+
+                            <option value="R1030">무기계약직</option>
+
+                            <option value="R1040">비정규직</option>
+
+                            <option value="R1060">청년인턴(체험형)</option>
+
+                            <option value="R1070">청년인턴(채용형)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="recrutSe">경력구분</label>
+                        <select id="recrutSe" class="form-select">
+                            <option value="">전체</option>
+
+                            <option value="R2010">신입</option>
+
+                            <option value="R2020">경력</option>
+
+                            <option value="R2030">신입+경력</option>
+
+                            <option value="R2040">외국인 전형</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pbancBgngYmd">기간(시작)</label>
+                        <input id="pbancBgngYmd" name="pbancBgngYmd" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="pbancEndYmd">기간(종료)</label>
+                        <input id="pbancEndYmd" name="pbancEndYmd" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-2">
+                        <label for="replmprYn">대체인력 유무</label>
+                        <select id="replmprYn" class="form-select">
+                            <option value="">전체</option>
+                            <option value="Y">예</option>
+                            <option value="N">아니오</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ongoingYn">상태</label>
+                        <select id="ongoingYn" class="form-select">
+                            <option value="A">전체</option>
+                            <option value="Y">진행</option>
+                            <option value="N">종료</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="recrutPbancTtl">공시제목</label>
+                        <input id="recrutPbancTtl" name="recrutPbancTtl" type="text" class="form-control"
+                               placeholder="공시제목을 입력해주세요.">
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-4">
+                <button id="searchBtn" class="btn btn-primary" onclick="fetchRecruitments()">검색</button>
+                <button id="searchBunRe" class="btn btn-secondary" onclick="resetFilters()">검색초기화</button>
+            </div>
+
+            <div class="results-section mt-4 text-center">
+                <div class="results-count">총 <span id="resultCount">0</span>건</div>
+                <div class="table-container">
+                    <table class="results-table table table-striped mt-3">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>상태</th>
+                            <th>공시기관</th>
+                            <th>제목</th>
+                            <th>시작일</th>
+                            <th>종료일</th>
+                            <th>채용분야</th>
+                            <th>고용형태</th>
+                            <th>채용구분</th>
+                            <th>채용인원</th>
+                        </tr>
+                        </thead>
+                        <tbody id="recruitmentBody">
+                        <!-- 채용 정보 로드 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="pagination">
+            <span class="page-info">
+                <span id="currentPage">1</span> / <span id="totalPages">1</span>
+            </span>
+                <button class="btn btn-outline-primary btn-prev" onclick="prevPage()">이전</button>
+                <button class="btn btn-outline-primary btn-next" onclick="nextPage()">다음</button>
+            </div>
+        </div>
+        <button id="topButton" onclick="scrollToTop()" class="top-button">&#9650;</button>
+        <br>
+
+        <div class="container mt-5">
+            <h1 class="page-title text-center mb-4">취업 TOOL</h1>
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <!-- 글자수 세기 -->
+                <div class="tool-card mx-2 text-center">
+                    <a href="/character_count" class="text-decoration-none">
+                        <img src="/images/character-count.png" alt="글자수 세기" class="tool-icon mb-2">
+                        <h5 class="tool-title">글자수 세기</h5>
+                    </a>
+                </div>
+
+                <!-- 연봉 계산기 -->
+                <div class="tool-card mx-2 text-center">
+                    <a href="/salary_calculator" class="text-decoration-none">
+                        <img src="/images/calculator.png" alt="연봉 계산기" class="tool-icon mb-2">
+                        <h5 class="tool-title">연봉 계산기</h5>
+                    </a>
+                </div>
+
+                <!-- 퇴직금 계산기 -->
+                <div class="tool-card mx-2 text-center">
+                    <a href="/retirement_calculator" class="text-decoration-none">
+                        <img src="/images/calculator.png" alt="퇴직금 계산기" class="tool-icon mb-2">
+                        <h5 class="tool-title">퇴직금 계산기</h5>
+                    </a>
+                </div>
+
+                <!-- 실업급여 계산기 -->
+                <div class="tool-card mx-2 text-center">
+                    <a href="/unemployment_calculator" class="text-decoration-none">
+                        <img src="/images/calculator.png" alt="실업급여 계산기" class="tool-icon mb-2">
+                        <h5 class="tool-title">실업급여 계산기</h5>
+                    </a>
+                </div>
+
+                <!-- 졸업 연도 계산기 -->
+                <div class="tool-card mx-2 text-center">
+                    <a href="/graduation_calculator" class="text-decoration-none">
+                        <img src="/images/calculator.png" alt="졸업 연도 계산기" class="tool-icon mb-2">
+                        <h5 class="tool-title">졸업 연도 계산기</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+</div>
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="container d-flex flex-column align-items-center">
+                <img src="/images/로고.png" alt="면접의 신 로고" class="img-fluid mb-3"
+                     style="max-width: 100px; height: auto;">
+                <div class="text-center text-body-secondary mt-3 d-flex flex-wrap justify-content-center">
+                    <div class="p-2">
+                        <p class="mb-0">프로젝트: 면접의 신</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">개발자: 김도균, 석재민</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">팀장: 김도균</p>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0">연락처: 010-5627-3836</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script>
+    let currentPage = 1;
+    let totalPages = 1;
+    let itemsPerPage = 5; // 페이지당 표시할 데이터 수
+
+    async function fetchRecruitments(pageNo = 1) {
+        try {
+            // 필터 값 가져오기
+            const instType = document.getElementById('instType') ? document.getElementById('instType').value : '';
+            const instClsf = document.getElementById('instClsf') ? document.getElementById('instClsf').value : '';
+            const inst = document.getElementById('inst') ? document.getElementById('inst').value : '';
+            const ncsCdLst = document.getElementById('ncsCdLst') ? document.getElementById('ncsCdLst').value : '';
+            const workRgnLst = document.getElementById('workRgnLst') ? document.getElementById('workRgnLst').value : '';
+            const acbgCondLst = document.getElementById('acbgCondLst') ? document.getElementById('acbgCondLst').value : '';
+            const hireType = document.getElementById('hireType') ? document.getElementById('hireType').value : '';
+            const recrutSe = document.getElementById('recrutSe') ? document.getElementById('recrutSe').value : '';
+            const pbancBgngYmd = document.getElementById('pbancBgngYmd') ? document.getElementById('pbancBgngYmd').value : '';
+            const pbancEndYmd = document.getElementById('pbancEndYmd') ? document.getElementById('pbancEndYmd').value : '';
+            const replmprYn = document.getElementById('replmprYn') ? document.getElementById('replmprYn').value : '';
+            const ongoingYn = document.getElementById('ongoingYn') ? document.getElementById('ongoingYn').value : '';
+            const recrutPbancTtl = document.getElementById('recrutPbancTtl') ? document.getElementById('recrutPbancTtl').value : '';
+
+            const serviceKey = 'l52ySnIre43oyyECI/Cc1LCZz2eGjPrjJYmGJCif1sdG6Zmc9LDShVmXo2IFi4/ktWaDJz9PYsnVdoI4ceKKfg==';
+
+            // URLSearchParams로 필터 값 추가
+            const params = new URLSearchParams({
+                serviceKey: serviceKey,
+                resultType: 'json',
+                numOfRows: itemsPerPage,  // 페이지당 아이템 수 적용
+                pageNo: pageNo,  // 현재 페이지 번호 적용
+                instType: instType !== '' ? instType : '',
+                instClsf: instClsf !== '' ? instClsf : '',
+                pblntInstCd: inst !== '' ? inst : '',
+                ncsCdLst: ncsCdLst !== '' ? ncsCdLst : '',
+                workRgnLst: workRgnLst !== '' ? workRgnLst : '',
+                acbgCondLst: acbgCondLst !== '' ? acbgCondLst : '',
+                hireType: hireType !== '' ? hireType : '',
+                recrutSe: recrutSe !== '' ? recrutSe : '',
+                pbancBgngYmd: pbancBgngYmd !== '' ? pbancBgngYmd : '',
+                pbancEndYmd: pbancEndYmd !== '' ? pbancEndYmd : '',
+                replmprYn: replmprYn !== '' ? replmprYn : '',
+                ongoingYn: ongoingYn !== '' ? ongoingYn : '',
+                recrutPbancTtl: recrutPbancTtl !== '' ? recrutPbancTtl : ''
+            });
+
+            const response = await fetch(`https://apis.data.go.kr/1051000/recruitment/list?${params}`);
+            const responseText = await response.text();
+            const data = JSON.parse(responseText);
+
+            if (data.result && Array.isArray(data.result)) {
+                populateTable(data.result); // 테이블에 데이터 표시
+
+                const totalCount = data.totalCount || 0;
+                totalPages = Math.ceil(totalCount / itemsPerPage); // 총 페이지 수 계산
+                document.getElementById('resultCount').textContent = totalCount; // 총 데이터 수 표시
+                updatePagination(); // 페이지네이션 업데이트
+            } else {
+                alert('조회된 데이터가 없습니다.');
+            }
+        } catch (error) {
+            console.error('Error fetching recruitment data:', error);
+        }
+    }
+
+    function populateTable(items) {
+        const tbody = document.getElementById("recruitmentBody");
+        tbody.innerHTML = '';
+
+        items.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${(currentPage - 1) * itemsPerPage + (index + 1)}</td>
+            <td>${item.ongoingYn || 'N/A'}</td>
+            <td>${item.instNm || 'N/A'}</td>
+            <td>${item.recrutPbancTtl || 'N/A'}</td>
+            <td>${item.pbancBgngYmd || 'N/A'}</td>
+            <td>${item.pbancEndYmd || 'N/A'}</td>
+            <td>${item.ncsCdNmLst || 'N/A'}</td>
+            <td>${item.hireTypeNmLst || 'N/A'}</td>
+            <td>${item.recrutSeNm || 'N/A'}</td>
+            <td>${item.recrutNope || 'N/A'}</td>
+        `;
+
+            // On click, redirect to the detailed page with the sn parameter
+            row.addEventListener('click', function () {
+                const sn = item.recrutPblntSn;  // API의 일련번호를 sn으로 할당
+                window.location.href = `/recruit-detail.html?sn=${sn}`;  // URL에 sn을 파라미터로 추가
+            });
+
+            tbody.appendChild(row);
+        });
+    }
+
+    function updatePagination() {
+        // 페이지 정보 업데이트
+        document.getElementById('currentPage').textContent = currentPage;
+        document.getElementById('totalPages').textContent = totalPages;
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--; // 페이지 감소
+            fetchRecruitments(currentPage); // 새로운 페이지 데이터 로드
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++; // 페이지 증가
+            fetchRecruitments(currentPage); // 새로운 페이지 데이터 로드
+        }
+    }
+
+    function resetFilters() {
+        // 필터 초기화 및 페이지 번호 초기화
+        document.getElementById('instType').value = '';
+        document.getElementById('instClsf').value = '';
+        document.getElementById('inst').value = '';
+        document.getElementById('ncsCdLst').value = '';
+        document.getElementById('workRgnLst').value = '';
+        document.getElementById('acbgCondLst').value = '';
+        document.getElementById('hireType').value = '';
+        document.getElementById('recrutSe').value = '';
+        document.getElementById('pbancBgngYmd').value = '';
+        document.getElementById('pbancEndYmd').value = '';
+        document.getElementById('replmprYn').value = '';
+        document.getElementById('ongoingYn').value = 'A'; // 기본값으로 전체 상태 설정
+        document.getElementById('recrutPbancTtl').value = '';
+
+        // 페이지 번호를 1로 초기화
+        currentPage = 1;
+
+        // 필터가 초기화된 상태로 다시 검색
+        fetchRecruitments(currentPage);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        fetchRecruitments();  // 첫 페이지 로드 시 호출
+    });
+
+    // 검색 버튼 클릭 시 페이지를 1로 초기화하고 검색 수행
+    document.getElementById('searchBtn').addEventListener('click', function () {
+        currentPage = 1; // 페이지를 1로 초기화
+        fetchRecruitments(currentPage); // 검색 수행
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const tableRows = document.querySelectorAll('.results-table tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', function () {
+                this.style.backgroundColor = '#f0f0f0'; // 호버 시 색상 변경
+            });
+
+            row.addEventListener('mouseleave', function () {
+                this.style.backgroundColor = ''; // 호버 해제 시 원래 색상으로 복귀
+            });
+            row.addEventListener('click', function () {
+                const recrutPblntSn = item.recrutPblntSn;  // sn 또는 recrutPblntSn 사용
+                if (recrutPblntSn) {
+                    window.location.href = `/recruit-detail.html?recrutPblntSn=${recrutPblntSn}`;  // sn 값이 존재하면 URL에 추가
+                } else {
+                    console.error('일련번호(recrutPblntSn)가 존재하지 않습니다.');
+                }
+            });
+        });
+    });
+
+    // 화면 스크롤을 최상단으로 이동시키는 함수
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // 스크롤 이벤트로 버튼 표시 제어
+    window.onscroll = function () {
+        const topButton = document.getElementById("topButton");
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+    };
+</script>
+
+</body>
+
+</html>
