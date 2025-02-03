@@ -27,9 +27,9 @@
 
 ### 📹 [시연 영상](https://drive.google.com/file/d/1nd-KBvB9GmLw1KwVWOmDVQSmhXiY1eGg/view?usp=sharing)
 
-### 📄 [PPT](https://drive.google.com/file/d/1-0nLBGCaFirQsS9YzaNkT_HMynD6glDW/view?usp=drive_link)
+### 📄 [PPT](https://docs.google.com/presentation/d/1ewIp6Ewz8a023O6pvgxxVSg6ij-5F7TX/edit?usp=drive_link&ouid=102263935085836178064&rtpof=true&sd=true)
 
-### 📑 [논문](https://drive.google.com/file/d/1XiMoU2AU1xXNuAgsvO861APGpdFjQyOQ/view?usp=drive_link)
+### 📑 [논문](https://drive.google.com/file/d/1eO-l2oUUuI2RuD30DO2goKIiBxyq_s8d/view?usp=drive_link)
 
   
 ## ✨  기능 
@@ -273,15 +273,15 @@ wrapt==1.16.0
 # 💞 팀원 소개
 ##### ❤️‍🔥 AMCN을 개발한 팀원들을 소개합니다!
 
-|                       **[김성학](https://github.com/hak0622)**                         | **[최승호](https://github.com/chltmdgh522)**    | 
+|                       **[석재민]**                         | **[김도균](https://github.com/chltmdgh522)**    | 
 |:-------------------------------------------------------------------------------------------------------:|:-------------------------------------:| 
-| ![img_8.png](img_8.png) |  <img src="https://github.com/user-attachments/assets/0be14931-7c1f-40ff-9275-041d7365e9f3" width="400"> |  
-|                                          Leader & Frontend                                           |                Backend & AI                | 
+| ![image](https://github.com/user-attachments/assets/640cb309-44a3-49e2-b848-f5cf75a53687)|![image](https://github.com/user-attachments/assets/a73109c6-29f5-498d-b7b2-394e777c73ae)|  
+|                                          Frontend                                           |              Leader & Backend                | 
 
 ## 😃 팀원 역할
 
 - **김도균**
-  - 팀장, 기획, 프론트 개발, 백엔드 개발(회원, 크롤링, 디자인 설계 및 프론트 개발, 프롬프트 개선
+  - 팀장, 기획, 프론트 개발, 백엔드 개발(회원관리, 커뮤니티(글쓰기, 댓글, 좋아요, 조회수, 글 수정), AI면접 구현(전체적으로), 면접 진행 후 피드백화면 구현)
 
 - **석재민**
-  - 프론트 개발, , ERD 구축, 프론트 개발, (카드뉴스, 커뮤니티, 회원, 뉴스) API 개발, OpenAI API 연동, 서버 배포 및 최적화, 뉴스 요약 모델 성능 향상, 웹 소켓 채팅, 프롬프트 개선 
+  - 프론트 설계 및 개발, 프론트 개발 
